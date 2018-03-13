@@ -1,0 +1,155 @@
+---
+layout: post
+title: "Rake notes"
+excerpt: "A typical ruby programmer's rake knowledge may very well constitute only 20% of what Rake is really about"
+---
+
+These notes were taken while watching Avdi's Rubytapas, which is an excellent guide for any programmer.
+
+
+### Rake command line flags
+
+```shell
+# display all tasks
+$ rake -T
+
+# show with prerequisites
+$ rake -P
+rake default
+    html
+rake html
+    ch1.html
+    ch2.html
+
+# show task definition location
+$ rake -W grape:clear_tokens
+rake grape:clear_tokens
+/Users/prasanna/src/re/qzick-app/qzick/lib/tasks/grape/clear_token.rake:4:in `block in <top (required)>'
+```
+
+More flags.
+
+```shell
+# show trace. But before that, in your rakefile, set this option:
+# Rake.application.options.trace_rules = true
+
+$ rake my_task --trace
+
+# run tasks parallely
+$rake -m
+# or define task in Rakefile as `multitask`
+```
+
+
+### File tasks
+
+A file task is a task named after any file. Eg:
+
+```rb
+task html: ['ch1.html', 'ch2.html', 'ch3.html']
+```
+
+The `html` task above, looks like it depends on the existence of 4 files.
+So to finish the `html` task, rake will try to look for:
+
+* the presence of these 4 files
+* even if they are present, it will look for a `rule` or a `filetask` that matches with any of the filename. If such a thing exists, rake would decide if it should run it (to created the file) depending on whether that task's dependencies (again, more file tasks) are met, ie, if those files have modification time newer than the one we are trying to build, rake will run the task. If not, no.
+
+```rb
+file 'ch1.html' => 'ch1.md' do
+ # u need to build the file here
+end
+```
+
+Another file task example.
+
+I want to create a html file based on a markdown file. But I want to do it efficiently. I only need to rebuild the .html file if the corresponding .md file has changed since last time.
+
+```ruby
+%w(ch1.md ch2.md ch3.md).each do |md_file|
+  html_file = File.basename(md_file, '.md') + '.html'
+  file html_file => md_file do
+    sh "pandoc -o #{html_file} #{md_file}"
+  end
+end
+```
+
+Invoking the rake task:
+```shell
+$ rake ch1.html   #(not ch1.md)
+```
+
+Rake determines that a file task needs to be run only if the file doesn’t exist or if any of the prerequisite file tasks are newer.
+
+
+Here's another example. To create a new database.yml file based on database.yml.example file.
+
+```ruby
+file 'config/database.yml' => 'config/database.yml.example' do
+  cp 'config/database.yml.example', 'config/database.yml'
+end
+```
+
+We could refactor this. Instead of duplicating the filename strings inside the block, use the block parameter 't' to get hold of them.
+
+```ruby
+file 'config/database.yml' => 'config/database.yml.example' do |task|
+  cp task.prerequisites.first, task.name
+end
+```
+
+And run the task like:
+
+```shell
+$ rake config/database.yml
+```
+
+What if there are other `*.example` files that you need to copy? There's the `rule task` for that.
+
+
+### Rule task
+
+```ruby
+rule '.yml' => '.yml.example' do |task|
+  cp task.source, task.name
+end
+```
+
+Run the task with:
+```shell
+$ rake config/database.yml
+```
+
+
+
+### Rake FileList
+What does Rake::FileList actually return? How `exclude` and `ext` methods on a filelist works?
+
+```rb
+# returns an array
+files = Rake::FileList.new '**/*.md', '**/*.markdown'
+# ["content/pages/about.md", "content/pages/habit.md", "README.markdown", "content/pages/now.markdown"]
+
+
+files.exclude /markdown/
+# ["content/pages/about.md", "content/pages/habit.md"]
+
+
+# ext is a monkey patched method on String
+files.ext '.MARKDOWN'
+# ["content/pages/about.MARKDOWN", "content/pages/habit.MARKDOWN"]
+```
+
+### Rake pathmap
+
+```rb
+source_files = Rake::FileList.new 'sources/**/*.md'
+# ['sources/a.md', 'sources/subdir/b.md', 'sources/c.md', 'sources/d.md']
+```
+
+This filelist must be converted to html files that have `outputs` dir instead of `sources` dir. How?
+
+```rb
+output_files = source_files.pathmap "%{^sources/,outputs/}X.html"
+# ['outputs/a.html', 'outputs/subdir/b.html', 'outputs/c.html', 'outputs/d.html']  
+```

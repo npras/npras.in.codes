@@ -1,0 +1,540 @@
+---
+layout: post
+title: "Notes: CSS Grid"
+excerpt: "From the excellent Wes Bos"
+---
+
+
+I'm currently going through the awesome __Wes Bos's__ excellent (and free) course on [CSS Grid](https://cssgrid.io/). I like the way these new specs are improving web page designing. Makes it easy for us devs. But we'll have to wait for all browsers to support this.
+
+About the course itself: Wes is a great teacher. He makes these topics appear very easy. If you were to go and explore css grids on your own, you'd take a lot more time to get the main concepts sink in. But his structured examples make things easy to understand. I felt the same way when I took his prior courses as well: Js30 and React for beginners. I myself am planning to create some educational content and I'd model it around his way.
+
+## Basics
+![Basic grid](/assets/images/grid-basic.png)
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: 100px auto 100px 100px;
+  grid-template-rows: 50px auto 150px;
+  grid-gap: 20px;
+}
+```
+
+1. make the parent div's display as grid (even the chiled `items` are displayed as grid here)
+2. define the grid-template-rows,columns as your desire
+3. add some gap between the 'cells' using grid-gap
+
+`grid-template-columns` define the width of the cols.
+`grid-template-rows` define the height of the rows.
+
+## Devtools
+![firefox devtools](/assets/images/grid-firefox-devtools.png)
+Firefox devtools has 'layout' subtab that lists the grids. It show different lines depending on whether the row/col was explicitly or implicitly declared.
+
+---
+
+```css
+    .container {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: 100px 100px;
+      grid-template-rows: 100px 100px;
+      grid-auto-rows: 40px;
+    }
+```
+
+This defines 2 cols and 2 rows. But if the container has more than 4 items, the extra items will be added to new rows (not columns! cols are fixed by default). To size the default rows, use `grid-auto-rows`. So now, all the extra items will be displayed in new rows and the height of them will be 40px.
+
+## New items are pushed to a new row by default
+In the above scenario, if we want new items to be added to new columns instead of new rows, then we need to define grid auto-flow as `column` like so:
+
+```css
+    .container {
+      display: grid;
+      grid-template-columns: 100px 50px;
+      grid-auto-flow: column; /* default is row. There's also the dense option. See below. */
+      grid-auto-columns: 30px;
+      grid-gap: 20px;
+    }
+```
+
+The items 3 and 4 are added as new cols.
+
+![autoflow-col](/assets/images/grid-autoflow-col.png)
+
+## Fractional unit fr
+
+Instead of representing grid item height/width in terms of px or %, prefer the new fractional unit `fr`.
+
+Here, like a normal div, the parent container with display grid is taking the viewport's width. But the 2 columns are not able to occupy the whole space because we defined them in px.
+
+![without-fr](/assets/images/grid-without-fr.png)
+
+It's easy to do layout and calculations if we use fr. `2fr 1fr 1fr` means make the 1st col twice as wide as the other 2 cols. You can mix %, `auto` and px with this.
+
+![with-fr](/assets/images/grid-with-fr.png)
+
+Above, you can see that the `Prasanna` item's col has `auto` width. So the __rest of the cols__ have the same width too (width of the widest content applied to all items in the col). The css for it:
+
+```css
+    .container {
+      display: grid;
+      grid-gap: 20px;
+      border: 10px solid var(--yellow);
+      grid-template-columns: 2fr auto 1fr 1fr;
+
+    }
+```
+
+You could use `fr` to define the row heights too, if the container has a fixed height.
+
+```css
+    .container {
+      display: grid;
+      height: 600px;
+      grid-gap: 20px;
+      border: 10px solid var(--yellow);
+      grid-template-columns: 2fr auto 1fr 1fr;
+      grid-template-rows: 1fr 2fr;
+    }
+```
+
+The 2nd rows is twice taller than the first.
+
+`grid-template-columns: repeat(4, 1fr 2fr);` is the same as `grid-template-columns: 1fr 2fr 1fr 2fr 1fr 2fr 1fr 2fr;`. Use `repeat` often.
+
+# grid-column
+
+To adjust the height/width of a particular item within the grid, you can use `grid-column` and `grid-row` and mention how much the item should span. (just like in tables rowspan colspan):
+
+![grid-span-row-and-col](/assets/images/grid-span-row-and-col.png)
+
+And its css:
+
+```css
+    .container {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 20px;
+    }
+
+    .item9 {
+      background: mistyrose;
+      grid-column: span 2;
+      grid-row: span 2;
+      /* width: 500px; */
+    }
+```
+
+Note: `grid-column: span 2;` is a shorthand for 2 props:
+
+```css
+grid-column-start: span 2;
+grid-column-end: auto;
+```
+
+These props can take just integer values which are the "grid line numbers" that you see in devtools.
+
+So, to place an item spanning from 2nd col to 5th col, you'd do this:
+
+```css
+    .container {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .poop {
+      background: #BADA55;
+      /* grid-column: span 2; */
+      grid-column-start: 2;
+      grid-column-end: 5;
+    }
+```
+
+to get this:
+
+![grid-colstartend](/assets/images/grid-colstartend.png)
+
+
+The shorthand `grid-column` can specify these 2 values in shortcuts like this:
+
+```css
+grid-column: 2 / 5; /* start at line 2 and end at line 5. same as above */
+grid-column: span 2 / 5; /* width should be spanning 2 columns, but it should end at line 5 */
+grid-column: 1 / span 2; /* width should be spanning 2 columns, but it should start at line 1 */
+grid-column: 1 / -1; /* start at track 1, and end at last */
+```
+
+You could also mix this with `grid-row` to make the items blocky.
+
+## auto-fill vs auto-fit
+
+The repeat function can take these as its 1st param instead of an integer. If we don't know how many rows/cols we'd need, then we could use these.
+
+With both of these, if we resize the window (or if we add more contents), the items will overflow to next row/col respecting the given height or width.
+
+The difference can be seen when lines are turned on in the devtools for parent container.
+
+```css
+    .container {
+      display: grid;
+      grid-gap: 20px;
+      border: 10px solid var(--yellow);
+      grid-template-columns: repeat(auto-fill, 150px);
+    }
+```
+
+![grid-autofill](/assets/images/grid-autofill.png)
+
+and,
+
+```css
+    .container {
+      display: grid;
+      grid-gap: 20px;
+      border: 10px solid var(--yellow);
+      grid-template-columns: repeat(auto-fit, 150px);
+    }
+```
+
+![grid-autofit](/assets/images/grid-autofit.png)
+
+
+In both the images, note the dark like at line 7 that marks the explicit end of the grid.
+
+With `auto-fit` it always fits the last element, but `auto-fill` allows the space to be 'filled out' if some space is available at all.
+
+__Usecase for `auto-fill`__: If you want a particular button (item04 below) to always be on the far right:
+
+with autofill. it works:
+![grid-buttonend-autofill](/assets/images/grid-buttonend-autofill.png)
+
+with autofill. it __doesn't__ work:
+![grid-buttonend-autofit](/assets/images/grid-buttonend-autofit.png)
+
+
+```css
+    .container {
+      display: grid;
+      grid-gap: 20px;
+      border: 10px solid var(--yellow);
+      grid-template-columns: repeat(auto-fit, 150px);
+    }
+
+    .item4 {
+      grid-column: auto / -1;
+    }
+```
+
+
+## grid-template-areas
+This looks like the best grid feature so far!
+
+Define a grid container and its template rows and cols first. And then define __names__ for the grid areas however you want. And finally, for each item within the container, you can tell the area name is should belong to!
+
+__Use case:__ You are building a simple website layout. It has a header, footer, main content and 2 sidebars. If you were to lay it out in a 2D grid, it would be like this: 4 cols and 4 rows. 1 col each for the 2 sidebards and 2 cols for the main content, and 1 row each for header and footer, and 2 rows for the main content and sidebar.
+
+After deciding this, you can use `grid-template-areas` to define names for these areas like so:
+
+```css
+    .container {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: 1fr 2fr 1fr;
+      grid-template-rows: 1fr 2fr 2fr 1fr;
+      grid-template-areas:
+        "header   header   header"
+        "sidebar1 content  sidebar2"
+        "sidebar1 content  sidebar2"
+        "footer   footer   footer";
+    }
+```
+
+You can see that we have defined a 4x3 grid (12 cells) and the `grid-template-areas` prop is used to define names for the cells. These names should then be used in the individual items to put them there, like so:
+
+```css
+    .header {
+      grid-area: header;
+    }
+
+    .footer {
+      grid-area: footer;
+    }
+
+    .item1 {
+      grid-area: sidebar1;
+    }
+
+    .item2 {
+      grid-area: content;
+    }
+    .item3 {
+      grid-area: sidebar2;
+    }
+```
+
+And now you get a page like this:
+
+![grid-templateareas](/assets/images/grid-templateareas.png)
+
+You could use media queries to redefine the grid areas too, like so:
+
+```css
+    @media (max-width: 700px) {
+      .container {
+        grid-template-areas:
+          "content"
+          "content"
+          "sidebar1"
+          "sidebar2"
+          "footer";
+      }
+```
+
+
+You could use the area names to define the grid items start and end span values in `grid-column` or `grid-row` prop.
+
+```css
+    .container {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-areas:
+        "p p p p h h h h"
+        "p p p p h h h h"
+        "p p p p h h h h"
+        "p p p p h h h h"
+        ;
+    }
+
+    .item3 {
+      grid-column: p-start / p-end;
+    }
+```
+
+And you get this:
+![grid-templateareasrange](/assets/images/grid-templateareasrange.png)
+
+## Naming the lines
+Just as you could name the areas of the grid, you could also name the lines that form the grid - both row and col lines. This would allow meaningfully expressing row/col span ranges.
+
+```css
+    .container {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: [sidebar-start] 1fr [content-start] 500px [content-end] 1fr [site-end];
+      grid-template-rows: [content-start] repeat(10, auto) [content-end];
+    }
+
+    .item3 {
+      background: slateblue;
+      grid-column: content-start; /* same as "2" */
+      grid-row: content-start / span content-end; /* same as "1 / span 10" */
+    }
+```
+
+## dense grid-auto-flow
+`grid-auto-flow` takes a 3rd value too apart from `row` and `column` - `dense`.
+
+This is similar to the difference between postgresql's window functions `rank` and `denserank`.
+
+This allows the grid to be efficient with the space. It allows other smaller items to take up the space that a bigger item couldn't use.
+
+Without dense:
+![grid-withoutdense](/assets/images/grid-withoutdense.png)
+
+With dense:
+![grid-withdense](/assets/images/grid-withdense.png)
+
+And its css:
+```css
+    .container {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: repeat(10, 1fr);
+      grid-auto-flow: dense;
+    }
+
+    .item:nth-child(6n) {
+      background: cornflowerblue;
+      grid-column: span 6;
+    }
+
+    .item:nth-child(8n) {
+      background: tomato;
+      grid-column: span 2;
+    }
+
+    .item:nth-child(9n) {
+      grid-row: span 2;
+    }
+
+    .item18 {
+      background: greenyellow !important;
+      grid-column-end: -1 !important;
+    }
+```
+
+## Alignment and centering
+
+`justify` means along the x axis. `align` means along the y axis.
+
+__`justify-items` prop:__ default value is `stretch`. Can have start, end and center too.
+
+This is `justify-items: end`:
+
+![grid-justify-items-end](/assets/images/grid-justify-items-end.png)
+
+And, this is `align-items: end`:
+
+![grid-align-items-end](/assets/images/grid-align-items-end.png)
+
+As you can see, it is now easy to center a content in a cell with:
+
+```css
+.container {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+```
+
+The whole content of the grid itself can be justified left or right or center wise with `justify-content`:
+
+THis is justify-content: left:
+![grid-justify-content-left](/assets/images/grid-justify-content-left.png)
+
+THis is justify-content: right:
+![grid-justify-content-right](/assets/images/grid-justify-content-right.png)
+
+It also takes these values: space-around, space-between. These values spread out the space evenly.
+
+To do the same along the y axis, use `align-content`.
+
+To justify/align a single item in the grid, use `justify-self` and `align-self`.
+
+## Exercise: Album layout
+
+Given a html markup like this:
+
+```html
+  <div class="albums">
+
+    <div class="album">
+      <img class="album__artwork" src="https://source.unsplash.com/random/300x300?v=1">
+      <div class="album__details">
+        <h2>Album Title</h2>
+        <p class="album__artist">Artist Name</p>
+        <p class="album__desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum sed sint doloremque repellat, iste debitis.</p>
+        <p class="album__desc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis, excepturi!</p>
+      </div>
+    </div>
+    <div class="album">
+      <img class="album__artwork" src="https://source.unsplash.com/random/300x300?v=2">
+      <div class="album__details">
+        <h2>Album Title</h2>
+        <p class="album__artist">Artist Name</p>
+        <p class="album__desc">short.</p>
+      </div>
+    </div>
+  
+   <! more albums -->
+  </div>
+```
+
+Using grid layout, make it look like this: It should also be responsive; as we resize, the number of cols should become less and less.
+
+![grid-album](/assets/images/grid-album.png)
+
+To solve this:
+* define a grid on the outer `.albums`
+* there's no fixed number of cols or rows. And they should be responsinve. Use this: `repeat(auto-fit, minmax(300px, 1fr))`
+* Make each album a grid itself so that we can display the image and details side by side.
+
+The css:
+
+```css
+    .albums {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-gap: 20px;
+    }
+
+    .album {
+      background: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      grid-gap: 10px;
+      align-items: center;
+      color: white;
+    }
+
+    .album__artwork {
+      width: 100%;
+    }
+```
+
+
+## Fullbleed blog
+The final exercise in the course was to build a full bleed blog, like this:
+
+![grid-fullbleed](/assets/images/grid-fullbleed.png)
+
+
+Fullbleed means some text can bleed out of the normally defined left and right margins. Here you can see that there are "tips" that bleed to left or right and quotes that bleed both left and right.
+
+The plan is very simple. Just create a 3 col grid layout.
+
+```css
+  .post {
+    display: grid;
+    max-width: 1000px;
+    margin: 200px auto;
+    grid-gap: 10px 50px;
+    /* notice that this can be anything proportionate */
+    grid-template-columns: 3fr 12fr 5fr;
+  }
+```
+
+And then make all elements within the container as grid items and make them occupy the middle col.
+
+```css
+  .post > * {
+    grid-column: 2 / -2;
+  }
+```
+
+The images and blockquotes span entire row. That is, they occupy all 3 cols:
+
+```css
+  .post > blockquote,
+  .post > figure {
+    grid-column: 1 / -1;
+  }
+```
+
+The tips are easy:
+
+```css
+  .tip {
+    background: #FAFAFA;
+    padding: 10px;
+    grid-row: span 5;
+    align-self: start;
+  }
+
+  .tip-left {
+    grid-column: 1 / span 1;
+    text-align: right;
+    border-right: 2px solid var(--yellow);
+  }
+
+  .tip-right {
+    grid-column: span 1 / -1;
+    text-align: left;
+    border-left: 2px solid var(--yellow);
+  }
+```

@@ -1,0 +1,19 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+title: Prasanna Natarajan
+email: prasanna@npras.in
+description: > # this means to ignore newlines until "baseurl:"
+  I use my Rails, React and Devops expertise to benefit your Business.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://npras.in" # the base hostname & protocol for your site
+
+# Build settings
+markdown: kramdown
+exclude: [Gemfile*, Resume.docx, .ruby-version, templates]
+destination: "./../../npras.in.sites/npras.in"

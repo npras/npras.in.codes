@@ -1,0 +1,157 @@
+---
+layout: default
+---
+
+<div class="home">
+
+  <h1>Books I've Read</h1>
+
+  <p>A short review, a rating, and <strong>detailed notes</strong> from the books I've read, inspired by <a href="https://sivers.org/book">Derek Sivers</a>.</p>
+
+  <p>Highlights extracted from my kindle using the <a href="https://github.com/npras/kindle_pras"><strong>kindle_pras</strong></a> tool I built. </p>
+
+  <p>Sorted with my absolute favorites in the top. Sort by <a id="sort-title" href="/?sort=title"><strong>title</strong></a>, <a id="sort-date" href="/?sort=date"><strong>newest</strong></a> or <a id="sort-rating" href="/?sort=rating"><strong>rating</strong></a>.</p>
+
+  <p class="rss-subscribe">Subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a>.</p>
+
+
+  <hr>
+  <br>
+  
+
+  <h2>The List (<span id="books-count">{{ site.posts | size }}</span>)</h2>
+
+  <div>
+    <br/>
+    <input id="search" placeholder="Search by Title or Author..."/>
+    <br/>
+    <br/>
+  </div>
+
+  <div class="books-container">
+    <ul class="post-list">
+      {% for post in site.posts %}
+      <li class="book-in-list">
+      <h2>
+        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}"><strong>{{ post.title }}</strong></a>
+      </h2>
+      <p class='excerpt'>{{ post.excerpt }}</p>
+      <div class="gray-line"></div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+</div>
+
+
+<script>
+const regexpRating = /RATING: (\d{1,2})\/10$/;
+const regexpDate = /READ: (\d{4}-\d{2}-\d{2}),/;
+
+const selectorExcerptData = 'h2 + p.excerpt + p';
+const selectorTitle = 'h2 a';
+const selectorBooksUl = 'ul.post-list';
+const selectorBookLi = 'li.book-in-list';
+const selectorBooksContainer = 'div.books-container';
+
+const elemRating = document.getElementById('sort-rating');
+const elemTitle = document.getElementById('sort-title');
+const elemDate = document.getElementById('sort-date');
+const elemSearch = document.getElementById('search');
+
+const ulClass = 'post-list';
+
+const myModule = {
+  sortCategory: '',
+
+  initialBooks: Array.from(document.querySelectorAll(selectorBookLi)),
+
+  sortCriterion(book) {
+    let text;
+    switch(this.sortCategory) {
+      case 'rating':
+        text = book.querySelector(selectorExcerptData).textContent;
+        return parseInt(regexpRating.exec(text)[1], 10);
+      case 'title':
+        return book.querySelector(selectorTitle).textContent.trim().toLowerCase();
+      case 'date':
+        text = book.querySelector(selectorExcerptData).textContent;
+        return regexpDate.exec(text)[1];
+    }
+  },
+
+  compareFn(a, b) {
+    const sortableA = myModule.sortCriterion(a);
+    const sortableB = myModule.sortCriterion(b);
+    if (sortableA < sortableB) { return 1; }
+    else if (sortableA > sortableB) { return -1; }
+    else { return 0; }
+  },
+
+  doSort() {
+    let books = Array.from(this.initialBooks); // local copy
+    books.sort(this.compareFn);
+    let oldUl = document.querySelector(selectorBooksUl);
+    let newUl = document.createElement('ul');
+    newUl.classList.add(ulClass);
+    books.forEach(book => newUl.appendChild(book));
+    document
+      .querySelector(selectorBooksContainer)
+      .replaceChild(newUl, oldUl);
+  },
+
+  ehSortByRating(e) {
+    e.preventDefault();
+    myModule.sortCategory = 'rating';
+    myModule.doSort();
+  },
+
+  ehSortByTitle(e) {
+    e.preventDefault();
+    myModule.sortCategory = 'title';
+    myModule.doSort();
+  },
+
+  ehSortByDate(e) {
+    e.preventDefault();
+    myModule.sortCategory = 'date';
+    myModule.doSort();
+  },
+
+  ehSearch(e) {
+    let searchTxt = e.currentTarget.value.toLowerCase();
+    filteredBooks = myModule.initialBooks.filter(book => {
+      title = book.querySelector(selectorTitle).textContent.trim().toLowerCase();
+      return title.includes(searchTxt);
+    });
+    if (!searchTxt.length) {
+      filteredBooks = myModule.initialBooks;
+    }
+    let oldUl = document.querySelector(selectorBooksUl);
+    let newUl = document.createElement('ul');
+    newUl.classList.add(ulClass);
+    filteredBooks.forEach(book => newUl.appendChild(book));
+    document
+      .querySelector(selectorBooksContainer)
+      .replaceChild(newUl, oldUl);
+    document.getElementById('books-count').innerHTML = filteredBooks.length;
+  },
+
+  ehFocusSearch(e) {
+    if (e.keyCode === 47) { elemSearch.focus() }
+  },
+
+  ehInit(e) {
+    elemSearch.value = '';
+    elemRating.addEventListener('click', myModule.ehSortByRating);
+    elemTitle.addEventListener('click', myModule.ehSortByTitle);
+    elemDate.addEventListener('click', myModule.ehSortByDate);
+    elemSearch.addEventListener('input', myModule.ehSearch);
+    elemSearch.addEventListener('change', myModule.ehSearch);
+    document.addEventListener('keypress', myModule.ehFocusSearch);
+  }
+};
+
+document.addEventListener('DOMContentLoaded', myModule.ehInit);
+</script>

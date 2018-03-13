@@ -1,0 +1,5 @@
+baseURL = "https://diary.npras.in/"
+languageCode = "en-us"
+title = "Prasanna Natarajan's reflections"
+theme = "temple"
+publishDir = "./../../npras.in.sites/diary.npras.in"

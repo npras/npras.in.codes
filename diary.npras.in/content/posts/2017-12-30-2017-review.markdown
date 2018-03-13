@@ -1,0 +1,46 @@
+---
+title: "2017 Review"
+date: 2017-12-30
+---
+
+#### Creations
+31 blog posts at my tech blog: [tech blog](https://tech.npras.in/). I thought it was great, but I had the exact same number in 2016 too. Need to have more by next year. Or should I? What value am I getting out of these?
+
+#### Consumptions
+8 books and 2 tech books.
+
+1. The Road Less Travelled: A New Psychology of Love, Traditional Values and Spiritual Growth by Scott M
+2. HPMOR
+3. Obstacle is the Way by Ryan Holiday
+4. Millionaire Fastlane by MJ
+5. Worm by Wildbow
+6. Solving the Procrastination Puzzle by Timothy A
+7. GTD for hackers
+8. Jonathan Livingston Seagull
+
+1. Fullstack React
+2. Mastering PostgreSQL
+
+You can see some of my reviews at [book review blog](https://books.npras.in/).
+
+And a whopping __32 tamil movies__ and some __5+ english movies__.
+
+
+The create to consume ratio isn't to my liking now. I'll have to build habits to increase creation and reduce consumption.
+
+#### Learnings
+1. Udemy google sheets
+2. Udemy ethical hacking
+3. Some hindi
+
+
+#### Side projects
+None.
+
+This is ridiculous. Need to have something worthy hear this time next year.
+
+---
+
+#### 2018 Plans
+--placeholder--
+

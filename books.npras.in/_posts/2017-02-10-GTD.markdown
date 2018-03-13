@@ -1,0 +1,156 @@
+---
+layout: post
+title: "Getting Things Done - by David Allen"
+---
+
+ISBN: 978-0349410159, READ: 2017-02-10, RATING: 8/10
+
+This book deserves a rating of only 1. It's so hard to read, and Allen asks us to do things that really impossible to do on a regular basis. He also repeats the main ideas so many times. I wanted to start this year by finishing this book asap and get on with getting things done. But the fluffy nature of the book made me to gloss over and not really pay attention.
+
+But! the ideas in this book will change your life. Without this I don't know how you'll get things done and achieve your goals. You shouldn't buy a book about how to stop procrastinating, or how to develop habits or how to get rich. Instead, you should learn GTD, and get shit done. You'll attain enlightenment. Reality will become your best friend. You'll love life.
+
+<!--more-->
+
+Do not read GTD by David Allen. Instead read [GTD for Hackers](https://gtdfh.branchable.com/). It explains everything so well in a practical manner, and it can be read in, like 30 mins. And it's free!
+
+UPDATE: I've set a remainder for 2 months from now, when I'll come back and add how successful I'm with GTD.
+
+See [__Amazon Page__](http://amzn.to/2lxEa77) for details and reviews.
+
+## Key Lessons
+* empty your head (into your Projects list)
+* If it can be done in 2 minutes, do it right away
+* weekly reviews are the central pillar of the system
+* 
+
+## My Notes
+It is possible to be effectively doing while you are delightfully being, in your ordinary workaday world.
+
+The art of resting the mind and the power of dismissing from it all care and worry is probably one of the secrets of our great men.
+
+Anxiety is caused by a lack of control, organization, preparation, and action.
+
+The methods I present here are all based on two key objectives: (1) capturing all the things that need to get done—now, later, someday, big, little, or in between—into a logical and trusted system outside of your head and off your mind; and (2) disciplining yourself to make front-end decisions about all of the “inputs” you let into your life so that you will always have a plan for “next actions” that you can implement or renegotiate at any moment.
+
+Your ability to generate power is directly proportional to your ability to relax.
+
+Anything that causes you to overreact or underreact can control you, and often does. Responding inappropriately to your e-mail, your staff, your projects, your unread magazines, your thoughts about what you need to do, your children, or your boss will lead to less effective results than you’d like. Most people give either more or less attention to things than they deserve, simply because they don’t operate with a “mind like water.”
+
+You’ve probably made many more agreements with yourself than you realize, and every single one of them—big or little—is being tracked by a less-than-conscious part of you. These are the “incompletes,” or “open loops,”
+
+Anything that does not belong where it is, the way it is, is an “open loop” pulling on your attention.
+
+I suggest that you write down the project or situation that is most on your mind at this moment. What most “bugs” you, distracts you, or interests you, or in some other way consumes a large part of your conscious attention?
+
+Now describe, in a single written sentence, your intended successful outcome for this problem or situation.
+
+Now write down the very next physical action required to move the situation forward.
+
+What probably happened is that you acquired a clearer definition of the outcome desired and the next action required. But what created that? The answer is, thinking. Not a lot, just enough to solidify your commitment and the resources required to fulfill it.
+
+You have to think about your stuff more than you realize but not as much as you’re afraid you might.
+
+Thinking in a concentrated manner to define desired outcomes is something few people feel they have to do. But in truth, outcome thinking is one of the most effective means available for making wishes reality.
+
+the reason something is “on your mind” is that you want it to be different than it currently is, and yet: • you haven’t clarified exactly what the intended outcome is; • you haven’t decided what the very next physical action step is; and/or • you haven’t put reminders of the outcome and the action required in a system you trust.
+
+I capture and organize 100 percent of my “stuff” in and with objective tools at hand, not in my mind. And that applies to everything—little or big, personal or professional, urgent or not. Everything.
+
+There is no reason ever to have the same thought twice, unless you like having that thought.
+
+I don’t want to waste time thinking about things more than once. That’s an inefficient use of creative energy and a source of frustration and stress.
+
+These collection tools should become part of your life-style. Keep them close by so no matter where you are you can collect a potentially valuable thought—think of them as being as indispensable as your toothbrush or your driver’s license or your glasses.
+
+You should have as many in-baskets as you need and as few as you can get by with.
+
+Implementing standard tools for capturing ideas and input will become more and more critical as your life and work become more sophisticated. As you proceed in your career, for instance, you’ll probably notice that your best ideas about work will not come to you at work. The ability to leverage that thinking with good collection devices that are always at hand is key to increased productivity.
+
+It does not take much strength to do things, but it requires a great deal of strength to decide what to do.
+
+the list of current projects could be kept on a page in a Day Runner; it could be a “To Do” category on a PDA; or it could be in a file labeled “Projects List.”
+
+For nonactionable items, the possible categories are trash, incubation tools, and reference storage.
+
+The outer ring of the workflow diagram shows the eight discrete categories of reminders and materials that will result from your processing all your “stuff.”
+
+To manage actionable things, you will need a list of projects, storage or files for project plans and materials, a calendar, a list of reminders of next actions, and a list of reminders of things you’re waiting for.
+
+Incubating reminders (such as “after March 1 contact my accountant to set up a meeting”) may be stored in a paper-based “tickler” file or in a paper- or computer-based calendar program.
+
+I define a project as any desired result that requires more than one action step.
+
+Projects do not need to be listed in any particular order, whether by size or by priority. They just need to be on a master list so you can review them regularly enough to ensure that appropriate next actions have been defined for each of them.
+
+Three things go on your calendar: • time-specific actions; • day-specific actions; and • day-specific information.
+
+It’s one thing to write down that you need milk; it’s another to be at the store and remember it.
+
+You need to be able to review the whole picture of your life and work at appropriate intervals and appropriate levels. For most people the magic of workflow management is realized in the consistent use of the review phase.
+
+Review your lists as often as you need to, to get them off your mind.
+
+The item you’ll probably review most frequently is your calendar, which will remind you about the “hard landscape” for the day—that is, what things will die if you don’t do them.
+
+After checking your calendar, you’ll most often turn to your “Next Actions” lists. These hold the inventory of predefined actions that you can take if you have any discretionary time during the day. If you’ve organized them by context (“At Home,” “At Computer,” “In Meeting with George”), they’ll come into play only when those contexts are available.
+
+In order to trust the rapid and intuitive judgment calls that you make about actions from moment to moment, you must consistently retrench at some more elevated level.
+
+Most people feel best about their work the week before their vacation, but it’s not because of the vacation itself. What do you do the last week before you leave on a big trip? You clean up, close up, clarify, and renegotiate all your agreements with yourself and others. I just suggest that you do this weekly instead of yearly.
+
+You have more to do than you can possibly do. You just need to feel good about your choices.
+
+The Four-Criteria Model for Choosing Actions in the Moment
+
+At 3:22 on Wednesday, how do you choose what to do? There are four criteria you can apply, in this order: 1. | Context 2. | Time available 3. | Energy available 4. | Priority
+
+There are two kinds of “incubate” systems that could work for this kind of thing: “Someday/Maybe” lists and a “tickler” file.
+
+as a general rule, you can be pretty creative with nothing more than an envelope and a pencil.
+
+These five phases of project planning occur naturally for everything you accomplish during the day. It’s how you create things—dinner, a relaxing evening, a new product, or a new company. You have an urge to make something happen; you image the outcome; you generate ideas that might be relevant; you sort those into a structure; and you define a physical activity that would begin to make it a reality. And you do all of that naturally, without giving it much thought.
+
+Forward-looking focus has even been a key element in Olympic-level sports training, with athletes imagining the physical effort, the positive energy, and the successful result to ensure the highest level of unconscious support for their performance.
+
+you won’t see how to do it until you see yourself doing it.
+
+One of the most powerful skills in the world of knowledge work, and one of the most important to hone and develop, is creating clear outcomes.
+
+The great thing about external brainstorming is that in addition to capturing your original ideas, it can help generate many new ones that might not have occurred to you if you didn’t have a mechanism to hold your thoughts and continually reflect them back to you.
+
+How much of this planning model do you really need to flesh out, and to what degree of detail? The simple answer is, as much as you need to get the project off your mind.
+
+The verb “process” does not mean “spend time on.” It just means “decide what the thing is and what action is required, and then dispatch it accordingly.”
+
+Even if the second item down is a personal note to you from the president of your country, and the top item is a piece of junk mail, you’ve got to process the junk mail first!
+
+When you’re in processing mode, you must get into the habit of starting at one end and just cranking through items one at a time, in order.
+
+Until you know what the next physical action is, there’s still more thinking required before anything can happen.
+
+When you get to a phone or to your computer, you want to have all your thinking completed so you can use the tools you have and the location you’re in to more easily get things done, having already defined what there is to do.
+
+I got it all together, but I forgot where I put it.
+
+What many people want to do, however, based on old habits of writing daily to-do lists, is put actions on the calendar that they think they’d really like to get done next Monday, say, but that then actually might not, and that might then have to be taken over to following days. Resist this impulse. You need to trust your calendar as sacred territory, reflecting the exact hard edges of your day’s commitments, which should be noticeable at a glance while you’re on the run. That’ll be much easier if the only things in there are those that you absolutely have to get done on that day.
+
+Another productivity factor that this kind of organization supports is leveraging your energy when you’re in a certain mode. When you’re in “phone mode,” it helps to make a lot of phone calls—just crank down your “Calls” list. When your computer is up and running and you’re cruising along digitally, it’s useful to get as much done on-line as you can without having to shift into another kind of activity.
+
+Creating and maintaining one list of all your projects (that is, again, every commitment or desired outcome that may require more than one action step to complete) can be a profound experience!
+
+I recommend that you create a “Someday/Maybe” list in whatever organizing system you’ve chosen. Then give yourself permission to populate that list with all the items of that type that have occurred to you so far. You’ll probably discover that simply having the list and starting to fill it out will cause you to come up with all kinds of creative ideas.
+
+the Weekly Review is whatever you need to do to get your head empty again. It’s going through the five phases of workflow management—collecting, processing, organizing, and reviewing all your outstanding involvements—until you can honestly say, “I absolutely know right now everything I’m not doing but could be doing if I decided to.”
+
+you should always organize your action reminders by context—“Calls,” “At Home,” “At Computer,” “Errands,” “Agenda for Joe,” “Agenda for Staff Meeting,” and so on.
+
+It is often easier to get wrapped up in the urgent demands of the moment than to deal with your in-basket, e-mail, and the rest of your open loops.
+
+Your ability to deal with surprise is your competitive edge. But at a certain point, if you’re not catching up and getting things under control, staying busy with only the work at hand will undermine your effectiveness.
+
+Let our advance worrying become advance thinking and planning.
+
+I HAVE A personal mission to make “What’s the next action?” part of the global thought process.
+
+When a culture adopts “What’s the next action?” as a standard operating query, there’s an automatic increase in energy, productivity, clarity, and focus.
+
